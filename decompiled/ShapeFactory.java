@@ -12,7 +12,7 @@ public class ShapeFactory
   
   public ShapeFactory(int shape_type) {
     stroke = new java.awt.BasicStroke(3.0F);
-    switch (shape_type / 10) {
+    switch (shape_type / 20) {
     case 1: 
       shape = createStar(3, new Point(0, 0), width / 2.0D, width / 2.0D);
       break;
@@ -46,12 +46,12 @@ public class ShapeFactory
       break;
     case 4:  stroke = new java.awt.BasicStroke(7.0F);
       break;
-    case 7: 
+    case 8: 
       paint = new java.awt.GradientPaint(
         -width, -height, java.awt.Color.white, 
         width, height, java.awt.Color.gray, true);
       break;
-    case 8: 
+    case 7: 
       paint = java.awt.Color.red;
       break;
     case 2: case 5: case 6: default: 
