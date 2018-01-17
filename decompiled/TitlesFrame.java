@@ -1,3 +1,4 @@
+/*Fixed*/
 import javax.swing.JFrame;
 
 public class TitlesFrame extends JFrame
