@@ -25,7 +25,7 @@ public class ShapeFactory
         this.width = 25;
         this.height = 25;
         this.stroke = new BasicStroke(3.0f);
-        switch (shape_type / 10) {
+        switch (shape_type / 20) {
             case 1: {
                 this.shape = createStar(3, new Point(0, 0), this.width / 2.0, this.width / 2.0);
                 break;
@@ -68,11 +68,11 @@ public class ShapeFactory
                 this.stroke = new BasicStroke(7.0f);
                 break;
             }
-            case 7: {
+            case 8: {
                 this.paint = new GradientPaint(-this.width, -this.height, Color.white, this.width, this.height, Color.gray, true);
                 break;
             }
-            case 8: {
+            case 7: {
                 this.paint = Color.red;
                 break;
             }
