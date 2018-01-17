@@ -1,71 +1,65 @@
-import java.awt.Insets;
-import java.awt.Dimension;
-import java.awt.geom.AffineTransform;
-import java.awt.Stroke;
-import java.awt.RenderingHints;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import javax.swing.Timer;
 import java.awt.Graphics2D;
-import java.awt.event.ActionListener;
-import javax.swing.JPanel;
+import java.awt.Insets;
+import java.awt.geom.AffineTransform;
+import javax.swing.Timer;
 
-// 
-// Decompiled by Procyon v0.5.30
-// 
-
-public class TitlesPanel extends JPanel implements ActionListener
+public class TitlesPanel extends javax.swing.JPanel implements java.awt.event.ActionListener
 {
-    private Graphics2D g2d;
-    private Timer animation;
-    private boolean is_done;
-    private int start_angle;
-    private int shape;
-    
-    public TitlesPanel(final int _shape) {
-        this.start_angle = 0;
-        this.is_done = true;
-        this.shape = _shape;
-        (this.animation = new Timer(50, this)).setInitialDelay(50);
-        this.animation.start();
+  private Graphics2D g2d;
+  private Timer animation;
+  private boolean is_done;
+  private int start_angle = 0;
+  private int shape;
+  
+  public TitlesPanel(int _shape) {
+    is_done = true;
+    shape = _shape;
+    animation = new Timer(50, this);
+    animation.setInitialDelay(50);
+    animation.start();
+  }
+  
+
+  public void actionPerformed(java.awt.event.ActionEvent arg0)
+  {
+    if (is_done) {
+      repaint();
     }
+  }
+  
+  private void doDrawing(Graphics g) {
+    is_done = false;
+    g2d = ((Graphics2D)g);
+    g2d.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, 
+      java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
     
-    @Override
-    public void actionPerformed(final ActionEvent arg0) {
-        if (this.is_done) {
-            this.repaint();
-        }
-    }
+    java.awt.Dimension size = getSize();
+    Insets insets = getInsets();
     
-    private void doDrawing(final Graphics g) {
-        this.is_done = false;
-        (this.g2d = (Graphics2D)g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        final Dimension size = this.getSize();
-        final Insets insets = this.getInsets();
-        final int w = size.width - insets.left - insets.right;
-        final int h = size.height - insets.top - insets.bottom;
-        final ShapeFactory shape = new ShapeFactory(this.shape);
-        this.g2d.setStroke(shape.stroke);
-        this.g2d.setPaint(shape.paint);
-        double angle = this.start_angle++;
-        if (this.start_angle > 360) {
-            this.start_angle = 0;
-        }
-        final double dr = 90.0 / (w / (shape.width * 1.5));
-        for (int j = shape.height; j < h; j += (int)(shape.height * 1.5)) {
-            for (int i = shape.width; i < w; i += (int)(shape.width * 1.5)) {
-                angle = ((angle > 360.0) ? 0.0 : (angle + dr));
-                final AffineTransform transform = new AffineTransform();
-                transform.translate(i, j);
-                transform.rotate(Math.toRadians(angle));
-                this.g2d.draw(transform.createTransformedShape(shape.shape));
-            }
-        }
-        this.is_done = true;
-    }
+    int w = width - left - right;
+    int h = height - top - bottom;
     
-    public void paintComponent(final Graphics g) {
-        super.paintComponent(g);
-        this.doDrawing(g);
-    }
+    ShapeFactory shape = new ShapeFactory(this.shape);
+    g2d.setStroke(stroke);
+    g2d.setPaint(paint);
+    double angle = start_angle++;
+    if (start_angle > 360) start_angle = 0;
+    double dr = 90.0D / (w / (width * 1.5D));
+    for (int j = height; j < h; j = (int)(j + height * 1.5D))
+      for (int i = width; i < w; i = (int)(i + width * 1.5D)) {
+        angle = angle > 360.0D ? 0.0D : angle + dr;
+        AffineTransform transform = new AffineTransform();
+        transform.translate(i, j);
+        transform.rotate(Math.toRadians(angle));
+        g2d.draw(transform.createTransformedShape(shape));
+      }
+    is_done = true;
+  }
+  
+  public void paintComponent(Graphics g)
+  {
+    super.paintComponent(g);
+    doDrawing(g);
+  }
 }
