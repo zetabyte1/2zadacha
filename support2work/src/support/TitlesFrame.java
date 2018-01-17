@@ -1,3 +1,5 @@
+package support;
+
 import javax.swing.SwingUtilities;
 import java.awt.Component;
 import javax.swing.JFrame;
