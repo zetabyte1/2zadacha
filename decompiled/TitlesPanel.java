@@ -26,6 +26,7 @@ public class TitlesPanel extends JPanel implements ActionListener
         this.start_angle = 0;
         this.is_done = true;
         this.shape = _shape;
+        /**Задаем скорость вращения**/
         (this.animation = new Timer(50, this)).setInitialDelay(50);
         this.animation.start();
     }
@@ -48,6 +49,7 @@ public class TitlesPanel extends JPanel implements ActionListener
         this.g2d.setStroke(shape.stroke);
         this.g2d.setPaint(shape.paint);
         double angle = this.start_angle++;
+        /**Если фигура делает круг, начинаем круг заного**/
         if (this.start_angle > 360) {
             this.start_angle = 0;
         }
